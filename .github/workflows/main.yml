@@ -1,0 +1,25 @@
+name: 'دانلود و اضافه کردن فایل به مخزن'
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: دریافت کدهای مخزن
+        uses: actions/checkout@v4
+
+      - name: دانلود فایل
+        run: |
+          wget -O "winrar.apk" "https://www.win-rar.com/fileadmin/winrar-versions/rar-android-720.131.apk"
+
+      - name: متعهد شدن و ارسال فایل به مخزن
+        uses: actions-x/commit@v6
+        with:
+          files: winrar.apk
+          name: "GitHub Actions"
+          email: "actions@github.com"
+          message: "اضافه کردن فایل winrar.apk"
